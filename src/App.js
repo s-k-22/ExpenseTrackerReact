@@ -35,12 +35,14 @@ function App() {
     <div>
       <h2>Let's get started!</h2>
       {expenses.map((exp) => {
-        return <ExpenseItem
-          locationOfExpenditure={exp.locationOfExpenditure}
-          title={exp.title}
-          amount={exp.amount}
-          date={exp.date}
-        />;
+        return (
+          <ExpenseItem
+            locationOfExpenditure={exp.locationOfExpenditure}
+            title={exp.title}
+            amount={exp.amount}
+            date={exp.date}
+          />
+        );
       })}
     </div>
   );
