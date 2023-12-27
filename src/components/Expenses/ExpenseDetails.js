@@ -3,8 +3,10 @@ import "./ExpenseItem.css";
 
 export const ExpenseDetails = (props) => {
   const [title, setTitle] = useState(props.title);
-  const [amount, setamount] = useState(props.amount);
   // console.log("title ", title); //latest value of title
+
+  const [amount, setamount] = useState(props.amount);
+  
   const clickHandler = () => {
     setTitle("updated");
     console.log(title);

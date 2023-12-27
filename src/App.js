@@ -1,5 +1,6 @@
 import { Card } from "./components/UI/Card";
 import ExpenseItem from "./components/Expenses/ExpenseItem";
+import NewExpense from "./components/Expenses/NewExpense/NewExpense";
 import "./index.css";
 
 const App = () => {
@@ -13,14 +14,14 @@ const App = () => {
     },
     {
       id: "e2",
-      locationOfExpenditure: "India",
+      locationOfExpenditure: "US",
       title: "New TV",
       amount: 799.49,
       date: new Date(2021, 2, 12),
     },
     {
       id: "e3",
-      locationOfExpenditure: "India",
+      locationOfExpenditure: "UK",
       title: "Car Insurance",
       amount: 294.67,
       date: new Date(2021, 2, 28),
@@ -35,6 +36,8 @@ const App = () => {
   ];
   return (
     <Card className="expenses">
+      <NewExpense />
+
       {expenses.map((exp) => {
         return (
           <ExpenseItem
