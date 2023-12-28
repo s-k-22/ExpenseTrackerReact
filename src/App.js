@@ -34,10 +34,14 @@ const App = () => {
       date: new Date(2021, 5, 12),
     },
   ];
+
+  const submitExpenseDataHandler = (expenseData) => {
+    console.log(expenseData);
+  };
+
   return (
     <Card className="expenses">
-      <NewExpense />
-
+      <NewExpense onSubmitExpenseData={submitExpenseDataHandler} />
       {expenses.map((exp) => {
         return (
           <ExpenseItem
