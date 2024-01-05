@@ -54,6 +54,22 @@ const App = () => {
     return exp.date.getFullYear() == filteredYear;
   });
 
+  let expenseContent = 'Expenses not found.'
+
+  if(filteredExpenses.length>0){
+    expenseContent = filteredExpenses.map((exp) => {
+      return (
+        <ExpenseItem
+          key={exp.id}
+          location={exp.location}
+          title={exp.title}
+          amount={exp.amount}
+          date={exp.date}
+        />
+      );
+    });
+  }
+
   return (
     <Card className="expenses">
       <NewExpense onSubmitExpenseData={submitExpenseDataHandler} />
@@ -61,17 +77,7 @@ const App = () => {
         selected={filteredYear}
         onChangeFilter={filterChangeHandler}
       />
-      {filteredExpenses.map((exp) => {
-        return (
-          <ExpenseItem
-            key={exp.id}
-            location={exp.location}
-            title={exp.title}
-            amount={exp.amount}
-            date={exp.date}
-          />
-        );
-      })}
+      {expenseContent}
     </Card>
   );
 };
