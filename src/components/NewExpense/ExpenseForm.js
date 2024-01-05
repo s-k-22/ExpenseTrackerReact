@@ -65,46 +65,73 @@ const ExpenseForm = (props) => {
     setEnteredAmount("");
     setEnteredDate("");
   };
+  
+  const btn = document.createElement("button");
+  btn.innerHTML = "Add New Expense";
+  btn.style.color = "black";
+
+  const showForm = () => {
+    btn.style.visibility = "hidden";
+
+    document.querySelector("form").style.display = "block";
+  };
+
+  btn.onclick = showForm;
+  const hideForm = () => {
+    console.log("clicked");
+    // document.querySelector("form").style.visibility = "hidden";
+    document.querySelector("form").style.display = "none";
+    document.querySelector("#outer-div").appendChild(btn);
+  };
 
   return (
-    <form onSubmit={submitHandler}>
-      <div className="new-expense__controls">
-        <div className="new-expense__control">
-          <label>Location</label>
-          <input
-            type="text"
-            value={enteredLocation}
-            onChange={locationChangeHandler}
-          />
-        </div>
+    <div id="outer-div">
+      <form onSubmit={submitHandler}>
+        <div className="new-expense__controls">
+          <div className="new-expense__control">
+            <label>Location</label>
+            <input
+              type="text"
+              value={enteredLocation}
+              onChange={locationChangeHandler}
+            />
+          </div>
 
-        <div className="new-expense__control">
-          <label>Title</label>
-          <input
-            type="text"
-            value={enteredTitle}
-            onChange={titleChangeHandler}
-          />
-        </div>
+          <div className="new-expense__control">
+            <label>Title</label>
+            <input
+              type="text"
+              value={enteredTitle}
+              onChange={titleChangeHandler}
+            />
+          </div>
 
-        <div className="new-expense__control">
-          <label>Amount</label>
-          <input
-            type="number"
-            value={enteredAmount}
-            onChange={amountChangeHandler}
-          />
-        </div>
+          <div className="new-expense__control">
+            <label>Amount</label>
+            <input
+              type="number"
+              value={enteredAmount}
+              onChange={amountChangeHandler}
+            />
+          </div>
 
-        <div className="new-expense__control">
-          <label>Date</label>
-          <input type="date" value={enteredDate} onChange={dateChangeHandler} />
+          <div className="new-expense__control">
+            <label>Date</label>
+            <input
+              type="date"
+              value={enteredDate}
+              onChange={dateChangeHandler}
+            />
+          </div>
         </div>
-      </div>
-      <div className="new-expense__actions">
-        <button type="submit">Add Expense</button>
-      </div>
-    </form>
+        <div className="new-expense__actions">
+          <button onClick={hideForm}>Cancel</button>
+          <button type="submit" onClick={hideForm}>
+            Add Expense
+          </button>
+        </div>
+      </form>
+    </div>
   );
 };
 
