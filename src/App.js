@@ -3,6 +3,7 @@ import ExpenseItem from "./components/Expenses/ExpenseItem";
 import NewExpense from "./components/Expenses/NewExpense/NewExpense";
 import "./index.css";
 import { useState } from "react";
+import ExpensesFilter from "./components/Expenses/ExpenseFilter";
 
 const intial_expenses = [
   {
@@ -37,6 +38,15 @@ const intial_expenses = [
 
 const App = () => {
   const [expenses, setExpenses] = useState(intial_expenses);
+  const [filteredYear, setFilteredYear] = useState("2020");
+
+  const filterChangeHandler = (selectedYear) => {
+    setFilteredYear(selectedYear);
+   const filteredList = expenses.filter((exp) => {
+     return exp.date.getFullYear() == selectedYear;
+   });
+    setExpenses(filteredList);
+  };
 
   const submitExpenseDataHandler = (expense) => {
     setExpenses((prevState) => {
@@ -47,8 +57,11 @@ const App = () => {
   return (
     <Card className="expenses">
       <NewExpense onSubmitExpenseData={submitExpenseDataHandler} />
-      {expenses.map((exp,index) => {
-        console.log(index)
+      <ExpensesFilter
+        selected={filteredYear}
+        onChangeFilter={filterChangeHandler}
+      />
+      {expenses.map((exp) => {
         return (
           <ExpenseItem
             key={exp.id}
