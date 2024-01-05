@@ -1,9 +1,8 @@
 import { Card } from "./components/UI/Card";
-import ExpenseItem from "./components/Expenses/ExpenseItem";
-import NewExpense from "./components/Expenses/NewExpense/NewExpense";
+import NewExpense from "./components/NewExpense/NewExpense";
 import "./index.css";
 import { useState } from "react";
-import ExpensesFilter from "./components/Expenses/ExpenseFilter";
+import Expenses from "./components/Expenses/Expenses";
 
 const intial_expenses = [
   {
@@ -38,11 +37,6 @@ const intial_expenses = [
 
 const App = () => {
   const [expenses, setExpenses] = useState(intial_expenses);
-  const [filteredYear, setFilteredYear] = useState("2020");
-
-  const filterChangeHandler = (selectedYear) => {
-    setFilteredYear(selectedYear);
-     };
 
   const submitExpenseDataHandler = (expense) => {
     setExpenses((prevState) => {
@@ -50,34 +44,10 @@ const App = () => {
     });
   };
 
-  const filteredExpenses = expenses.filter((exp) => {
-    return exp.date.getFullYear() == filteredYear;
-  });
-
-  let expenseContent = 'Expenses not found.'
-
-  if(filteredExpenses.length>0){
-    expenseContent = filteredExpenses.map((exp) => {
-      return (
-        <ExpenseItem
-          key={exp.id}
-          location={exp.location}
-          title={exp.title}
-          amount={exp.amount}
-          date={exp.date}
-        />
-      );
-    });
-  }
-
   return (
     <Card className="expenses">
       <NewExpense onSubmitExpenseData={submitExpenseDataHandler} />
-      <ExpensesFilter
-        selected={filteredYear}
-        onChangeFilter={filterChangeHandler}
-      />
-      {expenseContent}
+      <Expenses items={expenses}/>
     </Card>
   );
 };
