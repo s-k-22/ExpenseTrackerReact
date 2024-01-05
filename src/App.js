@@ -42,17 +42,17 @@ const App = () => {
 
   const filterChangeHandler = (selectedYear) => {
     setFilteredYear(selectedYear);
-   const filteredList = expenses.filter((exp) => {
-     return exp.date.getFullYear() == selectedYear;
-   });
-    setExpenses(filteredList);
-  };
+     };
 
   const submitExpenseDataHandler = (expense) => {
     setExpenses((prevState) => {
       return [expense, ...prevState];
     });
   };
+
+  const filteredExpenses = expenses.filter((exp) => {
+    return exp.date.getFullYear() == filteredYear;
+  });
 
   return (
     <Card className="expenses">
@@ -61,7 +61,7 @@ const App = () => {
         selected={filteredYear}
         onChangeFilter={filterChangeHandler}
       />
-      {expenses.map((exp) => {
+      {filteredExpenses.map((exp) => {
         return (
           <ExpenseItem
             key={exp.id}
